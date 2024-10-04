@@ -5,4 +5,4 @@
     - name: Create test.txt file
       copy:
         content: "This is a test file created by Ansible."
-        dest: /path/to/test.txt  # Replace with the desired path
+        dest: /opt/jenkins-agent/test.txt 
