@@ -16,17 +16,18 @@ resource "aws_instance" "bastion" {
       sudo apt install -y python3-pip
       sudo python3 -m pip install ansible
       sudo apt install git-all
+      sudo apt-get install openjdk-11-jdk -y
     EOT
 
 
   provisioner "local-exec" {
     command = <<-EOT
       #!/bin/bash
-      echo '[bastion-host]' >> ../inventory.ini
-      echo ${self.public_ip} >> ../inventory.ini
+      echo '[bastion-host]' >> ../pinventory.ini
+      echo ${self.public_ip} >> ../pinventory.ini
       chmod 600 ${pathexpand("~/.ssh/${var.key_name}.pem")}
-      sleep 60
-      scp -o StrictHostKeyChecking=no -i ${pathexpand("~/.ssh/${var.key_name}.pem")}  ${pathexpand("~/.ssh/${var.key_name}.pem")}  ubuntu@${self.public_ip}:/home/ubuntu/.ssh 
+      sleep 160
+      scp -o StrictHostKeyChecking=no -i ${pathexpand("~/.ssh/${var.key_name}.pem")}  ${pathexpand("~/.ssh/${var.key_name}.pem")} ${path.module}/../inventroy.ini ${path.module}/scripts/ansible-agent.sh  ubuntu@${self.public_ip}:/home/ubuntu
     EOT
   }
   
