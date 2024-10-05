@@ -73,4 +73,4 @@
     - name: List running containers
       command: docker ps -a
       register: running_containers
- 
+
