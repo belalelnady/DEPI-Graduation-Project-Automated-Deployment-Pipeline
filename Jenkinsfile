@@ -12,7 +12,7 @@ pipeline {
             steps {
                 script {
                     // Run the Ansible command
-                    sh 'ansible-playbook install-docker.yml' // Replace with your playbook and inventory files
+                    sh 'ansible-playbook -i ./inventory.ini install-docker.yml' // Replace with your playbook and inventory files
                 }
             }
         }
